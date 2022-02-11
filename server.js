@@ -21,26 +21,9 @@ var server = http.createServer(function(request, response){
 
   console.log('有个傻子发请求过来啦！路径（带查询参数）为：' + pathWithQuery)
 
-//   if(path === '/'){
-    // response.statusCode = 200
-    // response.setHeader('Content-Type', 'text/html;charset=utf-8')
-    // response.write(fs.readFileSync('./public/index.html'))
-    // response.end()
-//   } else if(path === '/style.css'){
-//     response.statusCode = 200
-//     response.setHeader('Content-Type', 'text/css;charset=utf-8')
-//     response.write(fs.readFileSync('./public/style.css'))
-//     response.end()
-//   } else {
-//     response.statusCode = 404
-//     response.setHeader('Content-Type', 'text/html;charset=utf-8')
-//     response.write(`你输入的路径不存在对应的内容`)
-//     response.end()
-//   }
 
 
-response.statusCode = 200
-
+  response.statusCode = 200
 //默认首页
 const filePath = path === '/' ? '/index.html' : path
 const index = filePath.lastIndexOf('.')
@@ -52,7 +35,8 @@ const fileTypes = {
     '.png':'image/png',
     '.jpg':'image/jpeg'
 }
-response.setHeader('Content-Type', `${fileTypes[suffix] || 'text/html'};charset=utf-8`)
+response.setHeader('Content-Type', `${fileTypes[suffix] || 'text/html'};charset=utf-8`) 
+//注意下一行是bug 会导致CSS样式加载不出来
 // response.setHeader('Content-Type', `${fileTypes[suffix]} ||'text/html';charset=utf-8`)
 let content 
 try{
